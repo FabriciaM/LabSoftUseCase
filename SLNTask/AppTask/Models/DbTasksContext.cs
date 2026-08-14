@@ -15,6 +15,8 @@ public partial class DbTasksContext : DbContext
     {
     }
 
+    public virtual DbSet<Departamento> Departamentos { get; set; }
+
     public virtual DbSet<Funcionario> Funcionarios { get; set; }
 
     public virtual DbSet<Incidente> Incidentes { get; set; }
@@ -26,6 +28,20 @@ public partial class DbTasksContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Departamento>(entity =>
+        {
+            entity.HasKey(e => e.Codigo).HasName("PK__Departam__06370DADED56F9A3");
+
+            entity.ToTable("Departamento");
+
+            entity.Property(e => e.Ativo)
+                .HasMaxLength(3)
+                .IsUnicode(false);
+            entity.Property(e => e.Descricao)
+                .HasMaxLength(250)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Funcionario>(entity =>
         {
             entity.HasKey(e => e.Codigo).HasName("PK__Funciona__06370DAD80DEAAF2");
