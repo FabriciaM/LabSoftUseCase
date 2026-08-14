@@ -15,6 +15,8 @@ public partial class DbTasksContext : DbContext
     {
     }
 
+    public virtual DbSet<CentralCusto> CentralCustos { get; set; }
+
     public virtual DbSet<Departamento> Departamentos { get; set; }
 
     public virtual DbSet<Funcionario> Funcionarios { get; set; }
@@ -28,6 +30,18 @@ public partial class DbTasksContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<CentralCusto>(entity =>
+        {
+            entity.HasKey(e => e.Codigo).HasName("PK__CentralC__06370DADDBC298A5");
+
+            entity.ToTable("CentralCusto");
+
+            entity.Property(e => e.NomeCusto)
+                .HasMaxLength(250)
+                .IsUnicode(false);
+            entity.Property(e => e.ValorAnualMeta).HasColumnType("decimal(18, 0)");
+        });
+
         modelBuilder.Entity<Departamento>(entity =>
         {
             entity.HasKey(e => e.Codigo).HasName("PK__Departam__06370DADED56F9A3");
