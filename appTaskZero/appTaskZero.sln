@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36717.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "appTaskZero", "appTaskZero\appTaskZero.csproj", "{D54FFC05-BF2D-4249-A3C2-273F78BDF8C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D54FFC05-BF2D-4249-A3C2-273F78BDF8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54FFC05-BF2D-4249-A3C2-273F78BDF8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54FFC05-BF2D-4249-A3C2-273F78BDF8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54FFC05-BF2D-4249-A3C2-273F78BDF8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {768E2AE9-3C48-47F4-BB99-56C9ED29D96C}
+	EndGlobalSection
+EndGlobal
