@@ -55,7 +55,7 @@ namespace AppTask.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Cargo,GerenteId")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("Nome,Cargo,CodigoGerente")] Funcionario funcionario)
         {
             if (funcionario.CodigoGerente.HasValue && funcionario.CodigoGerente == funcionario.Codigo)
                 ModelState.AddModelError(nameof(Funcionario.CodigoGerente), "O funcionário não pode ser seu próprio gerente.");
@@ -92,7 +92,7 @@ namespace AppTask.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Codigo,Nome,Cargo,GerenteId")] Funcionario funcionario)
+        public async Task<IActionResult> Edit(int id, [Bind("Codigo,Nome,Cargo,CodigoGerente")] Funcionario funcionario)
         {
             if (id != funcionario.Codigo)
             {
