@@ -7,17 +7,25 @@
 <div class="list-card">
     <div class="list-card-top"><h2>Lista de funcionários</h2><span class="record-count">@Model.Count() registros</span></div><div class="table-scroll">
         <table class="data-table">
+
             <thead><tr><th>Nome</th><th>Cargo</th><th>Ações</th></tr></thead>
             <tbody>
                 @if (!Model.Any())
                 {
                     <tr><td colspan="3" class="empty-state">Nenhum funcionário cadastrado.</td></tr>
+
+            <thead><tr><th>Nome</th><th>Cargo</th><th>Gerente</th><th>Ações</th></tr></thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="4" class="empty-state">Nenhum funcionário cadastrado.</td></tr>
+
                 }
                 else
                 {
                     foreach (var item in Model)
                     {
-                        <tr><td class="strong-cell">@item.Nome</td><td>@item.Cargo</td><td class="action-cell"><a asp-action="Edit" asp-route-id="@item.Codigo" class="table-action edit">Editar</a><a asp-action="Details" asp-route-id="@item.Codigo" class="table-action view">Detalhes</a><button type="button" class="table-action delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Codigo" data-descricao="@item.Nome">Excluir</button></td></tr>
+                        <tr><td class="strong-cell">@item.Nome</td><td>@item.Cargo</td><td>@(item.Gerente?.Nome ?? "Sem gerente")</td><td class="action-cell"><a asp-action="Edit" asp-route-id="@item.Codigo" class="table-action edit">Editar</a><a asp-action="Details" asp-route-id="@item.Codigo" class="table-action view">Detalhes</a><button type="button" class="table-action delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Codigo" data-descricao="@item.Nome">Excluir</button></td></tr>
                     }
                 }
             </tbody>

@@ -3,4 +3,8 @@
     ViewData["Title"] = "Detalhes do funcionário";
 }
 <div class="detail-page-header"><div><div class="eyebrow">Cadastros</div><h1>Detalhes do funcionário</h1><p>Visualize as informações do funcionário.</p></div><div class="detail-actions"><a asp-action="Edit" asp-route-id="@Model.Codigo" class="primary-btn">Editar funcionário</a><a asp-action="Index" class="secondary-btn">← Voltar</a></div></div>
+
 <div class="detail-card"><div class="profile-heading"><span class="profile-avatar">@Model.Nome.Substring(0, 1).ToUpper()</span><div><span class="detail-label">Funcionário</span><h2>@Model.Nome</h2></div></div><div class="detail-grid"><div><span class="detail-label">Nome completo</span><strong>@Model.Nome</strong></div><div><span class="detail-label">Cargo</span><strong>@Model.Cargo</strong></div></div></div>
+
+<div class="detail-card"><div class="profile-heading"><span class="profile-avatar">@Model.Nome.Substring(0, 1).ToUpper()</span><div><span class="detail-label">Funcionário</span><h2>@Model.Nome</h2></div></div><div class="detail-grid"><div><span class="detail-label">Nome completo</span><strong>@Model.Nome</strong></div><div><span class="detail-label">Cargo</span><strong>@Model.Cargo</strong></div><div><span class="detail-label">Gerente</span><strong>@(Model.Gerente?.Nome ?? "Sem gerente")</strong></div></div></div>
+
