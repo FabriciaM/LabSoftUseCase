@@ -1,39 +1,12 @@
 ﻿@model AppTask.Models.CentralCusto
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar central de custos";
 }
-
-<h1>Edit</h1>
-
-<h4>CentralCusto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Codigo" />
-            <div class="form-group">
-                <label asp-for="NomeCusto" class="control-label"></label>
-                <input asp-for="NomeCusto" class="form-control" />
-                <span asp-validation-for="NomeCusto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ValorAnualMeta" class="control-label"></label>
-                <input asp-for="ValorAnualMeta" class="form-control" />
-                <span asp-validation-for="ValorAnualMeta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<div class="form-page-header"><div><div class="eyebrow">Financeiro</div><h1>Editar central de custos</h1><p>Atualize o nome e a meta anual desta central.</p></div><a asp-action="Index" class="secondary-btn">← Voltar para a lista</a></div>
+<div class="form-card"><form asp-action="Edit" method="post">@Html.AntiForgeryToken()<input type="hidden" asp-for="Codigo" /><div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div><div class="form-grid"><div class="form-field"><label asp-for="NomeCusto">Nome do custo</label><input asp-for="NomeCusto" class="form-control" /><span asp-validation-for="NomeCusto" class="field-error"></span></div><div class="form-field"><label asp-for="ValorAnualMeta">Valor anual da meta</label><div class="money-input"><span>R$</span><input asp-for="ValorAnualMeta" class="form-control" type="number" min="0" step="0.01" /></div><span asp-validation-for="ValorAnualMeta" class="field-error"></span></div></div><div class="form-actions"><button type="submit" class="primary-btn">Salvar alterações</button><a asp-action="Index" class="secondary-btn">Cancelar</a></div></form></div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
 }

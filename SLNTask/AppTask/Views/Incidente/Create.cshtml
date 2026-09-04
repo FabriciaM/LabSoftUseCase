@@ -1,81 +1,22 @@
 ﻿@model AppTask.Models.Incidente
 
 @{
-    ViewData["Title"] = "Novo Incidente";
+    ViewData["Title"] = "Novo incidente";
 }
-
-<h1 class="mb-4">Cadastrar Novo Incidente</h1>
-
-<div class="row">
-    <div class="col-md-6">
-
-        <form action="/Incidente/Create" method="post">
-
-            @Html.AntiForgeryToken()
-
-            <div class="mb-3">
-                <label for="DescricaoProblema" class="form-label">
-                    Descrição do Problema
-                </label>
-
-                <input type="text"
-                       id="DescricaoProblema"
-                       name="DescricaoProblema"
-                       class="form-control"
-                       required />
-            </div>
-
-            <div class="mb-3">
-                <label for="DataIncidente" class="form-label">
-                    Data do Incidente
-                </label>
-
-                <input type="datetime-local"
-                       id="DataIncidente"
-                       name="DataIncidente"
-                       class="form-control"
-                       required />
-            </div>
-
-            <div class="mb-3">
-                <label for="Solucao" class="form-label">
-                    Solução
-                </label>
-
-                <input type="text"
-                       id="Solucao"
-                       name="Solucao"
-                       class="form-control" />
-            </div>
-
-            <div class="mb-3">
-                <label for="Resolvido" class="form-label">
-                    Resolvido
-                </label>
-
-                <input type="text"
-                       id="Resolvido"
-                       name="Resolvido"
-                       class="form-control"
-                       placeholder="Ex: Sim ou Não"
-                       required />
-            </div>
-
-            <div class="mb-3 d-flex gap-2">
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Salvar Incidente
-                </button>
-
-                <a href="/Incidente/Index"
-                   class="btn btn-secondary">
-                    Voltar para a Lista
-                </a>
-
-            </div>
-
-        </form>
-
-    </div>
+<div class="form-page-header"><div><div class="eyebrow">Monitoramento</div><h1>Novo incidente</h1><p>Registre um problema e acompanhe sua resolução.</p></div><a asp-action="Index" class="secondary-btn">← Voltar para a lista</a></div>
+<div class="form-card">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()<div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div><div class="form-grid">
+            <div class="form-field form-field-wide"><label asp-for="DescricaoProblema">Descrição do problema</label><input asp-for="DescricaoProblema" class="form-control" placeholder="Descreva o problema identificado" autocomplete="off" /><span asp-validation-for="DescricaoProblema" class="field-error"></span></div>
+            <div class="form-field"><label asp-for="DataIncidente">Data do incidente</label><input asp-for="DataIncidente" type="datetime-local" class="form-control" /><span asp-validation-for="DataIncidente" class="field-error"></span></div>
+            <div class="form-field"><label asp-for="Resolvido">Resolvido?</label><select asp-for="Resolvido" class="form-select"><option value="">Selecione uma opção</option><option value="Não">Não</option><option value="Sim">Sim</option></select><span asp-validation-for="Resolvido" class="field-error"></span></div>
+            <div class="form-field form-field-wide"><label asp-for="Solucao">Solução <small>(opcional)</small></label><textarea asp-for="Solucao" class="form-control" rows="3" placeholder="Descreva a solução aplicada, se houver"></textarea><span asp-validation-for="Solucao" class="field-error"></span></div>
+        </div><div class="form-actions"><button type="submit" class="primary-btn">Salvar incidente</button><a asp-action="Index" class="secondary-btn">Cancelar</a></div>
+    </form>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -1,8 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="dashboard-heading">
+    <h1>Visão geral</h1>
+    <a class="primary-btn" asp-controller="Tarefa" asp-action="Create"><span class="plus">＋</span> Nova tarefa</a>
 </div>
+
+<section class="kpi-grid" aria-label="Resumo do sistema">
+    <article class="kpi-card"><div class="kpi-icon">▣</div><div><div class="kpi-label">Tarefas em aberto</div><div class="kpi-number">@ViewBag.TarefasEmAberto</div></div></article>
+    <article class="kpi-card"><div class="kpi-icon">◷</div><div><div class="kpi-label">Em andamento</div><div class="kpi-number">@ViewBag.TarefasEmAndamento</div></div></article>
+    <article class="kpi-card"><div class="kpi-icon">✓</div><div><div class="kpi-label">Concluídas</div><div class="kpi-number">@ViewBag.TarefasConcluidas</div></div></article>
+    <article class="kpi-card"><div class="kpi-icon">△</div><div><div class="kpi-label">Incidentes ativos</div><div class="kpi-number">@ViewBag.IncidentesAtivos</div></div></article>
+</section>
+
+<div class="dashboard-columns">
+    <section class="panel">
+        <h2 class="panel-title">Atividade das tarefas</h2>
+        <div class="chart" aria-label="Gráfico ilustrativo de atividade semanal">
+            <div class="chart-column"><div class="bar"></div><span class="chart-label">Seg</span></div>
+            <div class="chart-column"><div class="bar"></div><span class="chart-label">Ter</span></div>
+            <div class="chart-column"><div class="bar"></div><span class="chart-label">Qua</span></div>
+            <div class="chart-column"><div class="bar"></div><span class="chart-label">Qui</span></div>
+            <div class="chart-column"><div class="bar"></div><span class="chart-label">Sex</span></div>
+        </div>
+        <div class="legend"><span><i class="line-key"></i> Em andamento</span><span><i></i> Concluídas</span></div>
+    </section>
+
+    <section class="panel">
+        <h2 class="panel-title">Próximos prazos</h2>
+        <div class="deadline-list">
+            @if (ViewBag.ProximosPrazos.Count == 0)
+            {
+                <p class="empty-state">Nenhuma tarefa cadastrada.</p>
+            }
+            else
+            {
+                foreach (var tarefa in ViewBag.ProximosPrazos)
+                {
+                    var status = tarefa.StatusTarefa?.ToString() ?? "Sem status";
+                    var classeStatus = status.ToLower().Contains("conclu") ? "status-done" : status.ToLower().Contains("andamento") ? "status-progress" : "status-open";
+                    <div class="deadline">
+                        <div class="deadline-icon">□</div>
+                        <div><div class="deadline-name">@tarefa.Descricao</div><div class="deadline-meta">@(tarefa.Funcionario?.Nome ?? "Sem funcionário")</div></div>
+                        <div><div class="deadline-date">@tarefa.DataPlanejada.ToString("dd/MM/yyyy")</div><span class="status @classeStatus">@status</span></div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+</div>
+
+<section class="panel recent-panel">
+    <h2 class="panel-title">Tarefas recentes</h2>
+    <table class="recent-table">
+        <thead><tr><th>Tarefa</th><th>Funcionário</th><th>Prazo</th><th>Status</th></tr></thead>
+        <tbody>
+            @if (ViewBag.TarefasRecentes.Count == 0)
+            {
+                <tr><td colspan="4" class="empty-state">Nenhuma tarefa cadastrada.</td></tr>
+            }
+            else
+            {
+                foreach (var tarefa in ViewBag.TarefasRecentes)
+                {
+                    var status = tarefa.StatusTarefa?.ToString() ?? "Sem status";
+                    var classeStatus = status.ToLower().Contains("conclu") ? "status-done" : status.ToLower().Contains("andamento") ? "status-progress" : "status-open";
+                    <tr><td>@tarefa.Descricao</td><td>@(tarefa.Funcionario?.Nome ?? "Sem funcionário")</td><td>@tarefa.DataPlanejada.ToString("dd/MM/yyyy")</td><td><span class="status @classeStatus">@status</span></td></tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a class="view-all" asp-controller="Tarefa" asp-action="Index">Ver todas as tarefas →</a>
+</section>

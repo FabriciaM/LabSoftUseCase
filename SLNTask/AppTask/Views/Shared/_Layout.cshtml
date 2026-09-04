@@ -1,66 +1,54 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AppTask</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AppTask.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppTask</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="Index">Tarefa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="Sobre">Sobre</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Incidente" asp-action="Index">Incidente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CentralCusto" asp-action="Index">Central Custo</a>
-                        </li>
+    <div class="app-shell">
+        <aside class="app-sidebar" id="appSidebar">
+            <a class="brand" asp-controller="Home" asp-action="Index">
+                <span class="brand-app">App</span><span class="brand-task">Task</span>
+            </a>
 
+            <nav class="side-nav" aria-label="Navegação principal">
+                <a class="side-nav-link active" asp-controller="Home" asp-action="Index"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+                <a class="side-nav-link" asp-controller="Tarefa" asp-action="Index"><span class="nav-icon">▣</span><span>Tarefas</span></a>
+                <a class="side-nav-link" asp-controller="Funcionario" asp-action="Index"><span class="nav-icon">♧</span><span>Funcionários</span></a>
+                <a class="side-nav-link" asp-controller="Incidente" asp-action="Index"><span class="nav-icon">△</span><span>Incidentes</span></a>
+                <a class="side-nav-link" asp-controller="Departamento" asp-action="Index"><span class="nav-icon">▥</span><span>Departamentos</span></a>
+                <a class="side-nav-link" asp-controller="CentralCusto" asp-action="Index"><span class="nav-icon">＄</span><span>Central de Custo</span></a>
+                <a class="side-nav-link" asp-controller="Tarefa" asp-action="Sobre"><span class="nav-icon">ⓘ</span><span>Sobre</span></a>
+            </nav>
 
-                    </ul>
+            <button class="collapse-sidebar" type="button" onclick="document.getElementById('appSidebar').classList.toggle('collapsed')">
+                <span>‹</span><span class="collapse-label">Recolher menu</span>
+            </button>
+        </aside>
+
+        <div class="app-main">
+            <header class="topbar">
+                <button class="mobile-menu" type="button" onclick="document.getElementById('appSidebar').classList.toggle('mobile-open')" aria-label="Abrir menu">☰</button>
+                <div class="breadcrumb-area"><span class="breadcrumb-home">⌂</span><span>/</span><strong>@(ViewData["Title"] ?? "Dashboard")</strong></div>
+                <div class="topbar-actions">
+                    <label class="search-box" aria-label="Buscar">
+                        <span>⌕</span><input type="search" placeholder="Buscar" />
+                    </label>
+                    <button class="notification" type="button" aria-label="Notificações"><span>♧</span><b>3</b></button>
+                    <div class="user-menu"><span class="avatar">A</span><span class="user-name">Administrador</span><span class="chevron">⌄</span></div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()            
-        </main>
+            </header>
+
+            <main class="content-area" role="main">
+                @RenderBody()
+            </main>
+            <footer class="app-footer">&copy; 2026 - AppTask</footer>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - AppTask - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,66 +1,6 @@
 ﻿@model AppTask.Models.Tarefa
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes da tarefa"; var status = Model.StatusTarefa ?? "Sem status"; var classe = status.ToLower().Contains("conclu") ? "status-done" : status.ToLower().Contains("andamento") ? "status-progress" : "status-open";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Tarefa</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataPlanejada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataPlanejada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataIniciada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataIniciada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataFinalizada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataFinalizada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataCancelada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataCancelada)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StatusTarefa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StatusTarefa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prazo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prazo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Funcionario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Funcionario.Cargo)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Codigo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<div class="detail-page-header"><div><div class="eyebrow">Gestão</div><h1>Detalhes da tarefa</h1><p>Visualize todas as informações do registro.</p></div><div class="detail-actions"><a asp-action="Edit" asp-route-id="@Model.Codigo" class="primary-btn">Editar tarefa</a><a asp-action="Index" class="secondary-btn">← Voltar</a></div></div>
+<div class="detail-card"><div class="detail-card-title"><div><span class="detail-label">Descrição</span><h2>@Model.Descricao</h2></div><span class="status @classe">@status</span></div><div class="detail-grid"><div><span class="detail-label">Data planejada</span><strong>@Model.DataPlanejada.ToString("dd/MM/yyyy HH:mm")</strong></div><div><span class="detail-label">Prazo</span><strong>@Model.Prazo</strong></div><div><span class="detail-label">Funcionário responsável</span><strong>@(Model.Funcionario?.Nome ?? "Não informado")</strong></div><div><span class="detail-label">Data iniciada</span><strong>@(Model.DataIniciada?.ToString("dd/MM/yyyy HH:mm") ?? "Não informado")</strong></div><div><span class="detail-label">Data finalizada</span><strong>@(Model.DataFinalizada?.ToString("dd/MM/yyyy HH:mm") ?? "Não informado")</strong></div><div><span class="detail-label">Data cancelada</span><strong>@(Model.DataCancelada?.ToString("dd/MM/yyyy HH:mm") ?? "Não informado")</strong></div></div></div>

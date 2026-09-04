@@ -1,60 +1,20 @@
 ﻿@model AppTask.Models.CentralCusto
 
 @{
-    ViewData["Title"] = "Nova Central de Custo";
+    ViewData["Title"] = "Nova central de custos";
 }
-
-<h1 class="mb-4">Cadastrar Nova Central de Custo</h1>
-
-<div class="row">
-    <div class="col-md-6">
-
-        <form action="/CentralCusto/Create" method="post">
-
-            @Html.AntiForgeryToken()
-
-            <div class="mb-3">
-                <label for="NomeCusto" class="form-label">
-                    Nome do Custo
-                </label>
-
-                <input type="text"
-                       id="NomeCusto"
-                       name="NomeCusto"
-                       class="form-control"
-                       placeholder="Digite o nome do custo"
-                       required />
-            </div>
-
-            <div class="mb-3">
-                <label for="ValorAnualMeta" class="form-label">
-                    Valor Anual da Meta
-                </label>
-
-                <input type="number"
-                       id="ValorAnualMeta"
-                       name="ValorAnualMeta"
-                       class="form-control"
-                       placeholder="Digite o valor anual"
-                       step="0.01"
-                       required />
-            </div>
-
-            <div class="mb-3 d-flex gap-2">
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Salvar Central de Custo
-                </button>
-
-                <a href="/CentralCusto/Index"
-                   class="btn btn-secondary">
-                    Voltar para a Lista
-                </a>
-
-            </div>
-
-        </form>
-
-    </div>
+<div class="form-page-header"><div><div class="eyebrow">Financeiro</div><h1>Nova central de custos</h1><p>Cadastre uma central e defina sua meta anual.</p></div><a asp-action="Index" class="secondary-btn">← Voltar para a lista</a></div>
+<div class="form-card">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()<div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div><div class="form-grid">
+            <div class="form-field"><label asp-for="NomeCusto">Nome do custo</label><input asp-for="NomeCusto" class="form-control" placeholder="Digite o nome da central de custo" autocomplete="off" /><span asp-validation-for="NomeCusto" class="field-error"></span></div>
+            <div class="form-field"><label asp-for="ValorAnualMeta">Valor anual da meta</label><div class="money-input"><span>R$</span><input asp-for="ValorAnualMeta" class="form-control" type="number" min="0" step="0.01" placeholder="0,00" /></div><span asp-validation-for="ValorAnualMeta" class="field-error"></span></div>
+        </div><div class="form-actions"><button type="submit" class="primary-btn">Salvar central</button><a asp-action="Index" class="secondary-btn">Cancelar</a></div>
+    </form>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

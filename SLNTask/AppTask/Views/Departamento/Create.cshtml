@@ -1,59 +1,20 @@
 ﻿@model AppTask.Models.Departamento
 
 @{
-    ViewData["Title"] = "Novo Departamento";
+    ViewData["Title"] = "Novo departamento";
 }
-
-<h1 class="mb-4">Cadastrar Novo Departamento</h1>
-
-<div class="row">
-    <div class="col-md-6">
-
-        <form action="/Departamento/Create" method="post">
-
-            @Html.AntiForgeryToken()
-
-            <div class="mb-3">
-                <label for="Descricao" class="form-label">
-                    Descrição
-                </label>
-
-                <input type="text"
-                       id="Descricao"
-                       name="Descricao"
-                       class="form-control"
-                       placeholder="Digite a descrição do departamento"
-                       required />
-            </div>
-
-            <div class="mb-3">
-                <label for="Ativo" class="form-label">
-                    Ativo
-                </label>
-
-                <input type="text"
-                       id="Ativo"
-                       name="Ativo"
-                       class="form-control"
-                       placeholder="Digite o status"
-                       required />
-            </div>
-
-            <div class="mb-3 d-flex gap-2">
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Salvar Departamento
-                </button>
-
-                <a href="/Departamento/Index"
-                   class="btn btn-secondary">
-                    Voltar para a Lista
-                </a>
-
-            </div>
-
-        </form>
-
-    </div>
+<div class="form-page-header"><div><div class="eyebrow">Cadastros</div><h1>Novo departamento</h1><p>Cadastre uma nova área para organizar a operação.</p></div><a asp-action="Index" class="secondary-btn">← Voltar para a lista</a></div>
+<div class="form-card">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()<div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div><div class="form-grid">
+            <div class="form-field"><label asp-for="Descricao">Descrição</label><input asp-for="Descricao" class="form-control" placeholder="Digite o nome do departamento" autocomplete="off" /><span asp-validation-for="Descricao" class="field-error"></span></div>
+            <div class="form-field"><label asp-for="Ativo">Status</label><select asp-for="Ativo" class="form-select"><option value="">Selecione o status</option><option value="Sim">Ativo</option><option value="Não">Inativo</option></select><span asp-validation-for="Ativo" class="field-error"></span></div>
+        </div><div class="form-actions"><button type="submit" class="primary-btn">Salvar departamento</button><a asp-action="Index" class="secondary-btn">Cancelar</a></div>
+    </form>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

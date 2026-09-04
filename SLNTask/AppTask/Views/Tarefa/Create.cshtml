@@ -4,72 +4,87 @@
     ViewData["Title"] = "Nova Tarefa";
 }
 
-<h1 class="mb-4">Cadastrar Nova Tarefa</h1>
+<div class="form-page-header">
+    <div>
+        <div class="eyebrow">Tarefas</div>
+        <h1>Cadastrar nova tarefa</h1>
+        <p>Preencha os dados abaixo para adicionar uma tarefa ao sistema.</p>
+    </div>
+    <a asp-action="Index" class="secondary-btn">← Voltar para a lista</a>
+</div>
 
-<div class="row">
-    <div class="col-md-6">
-        <form action="/Tarefa/Create" method="post">
-            @Html.AntiForgeryToken()
+<div class="form-card">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="validation-summary" role="alert"></div>
 
-            <div class="mb-3">
-                <label for="Descricao" class="form-label font-weight-bold">Descrição</label>
-                <input type="text" id="Descricao" name="Descricao" class="form-control" placeholder="Digite a descrição da tarefa" required />
+        <div class="form-grid">
+            <div class="form-field form-field-wide">
+                <label asp-for="Descricao">Descrição</label>
+                <input asp-for="Descricao" class="form-control" placeholder="Digite a descrição da tarefa" autocomplete="off" />
+                <span asp-validation-for="Descricao" class="field-error"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="DataPlanejada" class="form-label">Data Planejada</label>
-                <input type="datetime-local" id="DataPlanejada" name="DataPlanejada" class="form-control" required />
+            <div class="form-field">
+                <label asp-for="DataPlanejada">Data planejada</label>
+                <input asp-for="DataPlanejada" type="datetime-local" class="form-control" />
+                <span asp-validation-for="DataPlanejada" class="field-error"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="DataIniciada" class="form-label">Data Iniciada</label>
-                <input type="datetime-local" id="DataIniciada" name="DataIniciada" class="form-control" />
+            <div class="form-field">
+                <label asp-for="FuncionarioId">Funcionário responsável</label>
+                <select asp-for="FuncionarioId" class="form-select" asp-items="ViewBag.ListaFuncionario">
+                    <option value="">Selecione um funcionário</option>
+                </select>
+                <span asp-validation-for="FuncionarioId" class="field-error"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="DataFinalizada" class="form-label">Data Finalizada</label>
-                <input type="datetime-local" id="DataFinalizada" name="DataFinalizada" class="form-control" />
-            </div>
-
-            <div class="mb-3">
-                <label for="DataCancelada" class="form-label">Data Cancelada</label>
-                <input type="datetime-local" id="DataCancelada" name="DataCancelada" class="form-control" />
-            </div>
-
-            <div class="mb-3">
-                <label for="StatusTarefa" class="form-label">Status da Tarefa</label>
-                <select id="StatusTarefa" name="StatusTarefa" class="form-select" required>
-                    <option value="">-- Selecione o Status --</option>
+            <div class="form-field">
+                <label asp-for="StatusTarefa">Status da tarefa</label>
+                <select asp-for="StatusTarefa" class="form-select">
+                    <option value="">Selecione o status</option>
                     <option value="Pendente">Pendente</option>
                     <option value="Em Andamento">Em Andamento</option>
                     <option value="Concluído">Concluído</option>
                     <option value="Cancelado">Cancelado</option>
                 </select>
+                <span asp-validation-for="StatusTarefa" class="field-error"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="Prazo" class="form-label">Prazo</label>
-                <input type="text" id="Prazo" name="Prazo" class="form-control" placeholder="Ex: Em dia, Em atraso" required />
+            <div class="form-field">
+                <label asp-for="Prazo">Prazo</label>
+                <input asp-for="Prazo" class="form-control" placeholder="Ex.: Em dia ou Em atraso" />
+                <span asp-validation-for="Prazo" class="field-error"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="FuncionarioId" class="form-label">Funcionário Responsável</label>
-                <select id="FuncionarioId" name="FuncionarioId" class="form-select" required>
-                    <option value="">-- Selecione um Funcionário --</option>
-                    @if (ViewBag.ListaFuncionario != null)
-                    {
-                        foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ListaFuncionario)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    }
-                </select>
+            <div class="form-field">
+                <label asp-for="DataIniciada">Data iniciada <small>(opcional)</small></label>
+                <input asp-for="DataIniciada" type="datetime-local" class="form-control" />
+                <span asp-validation-for="DataIniciada" class="field-error"></span>
             </div>
 
-            <div class="mb-3 d-flex gap-2">
-                <button type="submit" class="btn btn-primary">Salvar Tarefa</button>
-                <a href="/Tarefa/Index" class="btn btn-secondary">Voltar para a Lista</a>
+            <div class="form-field">
+                <label asp-for="DataFinalizada">Data finalizada <small>(opcional)</small></label>
+                <input asp-for="DataFinalizada" type="datetime-local" class="form-control" />
+                <span asp-validation-for="DataFinalizada" class="field-error"></span>
             </div>
-        </form>
-    </div>
+
+            <div class="form-field">
+                <label asp-for="DataCancelada">Data cancelada <small>(opcional)</small></label>
+                <input asp-for="DataCancelada" type="datetime-local" class="form-control" />
+                <span asp-validation-for="DataCancelada" class="field-error"></span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Salvar tarefa</button>
+            <a asp-action="Index" class="secondary-btn">Cancelar</a>
+        </div>
+    </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
