@@ -38,6 +38,20 @@
                        required />
             </div>
 
+            <div class="mb-3">
+                <label for="FuncionarioId" class="form-label">Gerente</label>
+                <select id="FuncionarioId" name="FuncionarioId" class="form-select" required>
+                    <option value="">-- Selecione um Gerente --</option>
+                    @if (ViewBag.ListaFuncionario != null)
+                    {
+                        foreach (var item in (IEnumerable<SelectListItem>)ViewBag.ListaFuncionario)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+
             <div class="mb-3 d-flex gap-2">
                 <button type="submit"
                         class="btn btn-primary">
