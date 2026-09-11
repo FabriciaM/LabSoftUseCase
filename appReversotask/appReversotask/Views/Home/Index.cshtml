@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Tela inicial";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="mb-4">Bem-vindo ao sistema da clínica</h1>
+
+    <p class="lead mb-5">
+        Escolha uma opção para continuar:
+    </p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Administrador</h3>
+
+                    <p class="card-text">
+                        Gerencie médicos, pacientes e consultas.
+                    </p>
+
+                    <a asp-controller="Admin"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Entrar como administrador
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Paciente</h3>
+
+                    <p class="card-text">
+                        Acesse suas consultas.
+                    </p>
+
+                    <a asp-controller="Account"
+                       asp-action="Login"
+                       class="btn btn-success">
+                        Entrar como paciente
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

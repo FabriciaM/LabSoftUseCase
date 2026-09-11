@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Área administrativa";
+}
+
+<div class="container mt-4">
+    <h1>Área administrativa</h1>
+
+    <p class="lead">
+        Escolha uma operação:
+    </p>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h4>Pacientes</h4>
+
+                    <p>Cadastrar um novo paciente.</p>
+
+                    <a asp-controller="Paciente"
+                       asp-action="Create"
+                       class="btn btn-primary">
+                        Adicionar paciente
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h4>Médicos</h4>
+
+                    <p>Cadastrar um novo médico.</p>
+
+                    <a asp-controller="Medico"
+                       asp-action="Create"
+                       class="btn btn-primary">
+                        Adicionar médico
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h4>Consultas</h4>
+
+                    <p>Cadastrar uma nova consulta.</p>
+
+                    <a asp-controller="Consulta"
+                       asp-action="Create"
+                       class="btn btn-primary">
+                        Adicionar consulta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Voltar
+        </a>
+    </div>
+</div>
