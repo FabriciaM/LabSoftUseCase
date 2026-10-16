@@ -82,3 +82,106 @@ consultaParaCancelar?.Cancelar();
 
 // Exibindo relatório atualizado
 clinica.ExibirRelatorioGeral();
+
+// Demonstração do Pattern Prototype
+Console.WriteLine(
+    "\n=== PATTERN PROTOTYPE: " +
+    "PACOTES DE EXAMES ===");
+
+var gerenciador =
+    new GerenciadorPrototipos();
+
+// Criando o modelo base
+var checkupCardio =
+    new PacoteExame(
+        "Check-up Cardiológico",
+        "Jejum de 8h e evitar cafeína");
+
+checkupCardio.AdicionarProcedimento(
+    new Procedimento(
+        "Eletrocardiograma",
+        150.00m));
+
+checkupCardio.AdicionarProcedimento(
+    new Procedimento(
+        "Ecocardiograma",
+        350.00m));
+
+// Cadastrando o modelo no registry
+gerenciador.CadastrarPrototipo(
+    "CARDIO_PADRAO",
+    checkupCardio);
+
+Console.WriteLine(
+    "\n--- Modelo Base Cadastrado ---");
+
+checkupCardio.ExibirResumo();
+
+// Testando a cópia profunda
+Console.WriteLine(
+    "\n--- Atendimento 1: " +
+    "Cópia Profunda ---");
+
+var atendimento1 =
+    gerenciador.ObterClone(
+        "CARDIO_PADRAO");
+
+if (atendimento1 != null)
+{
+    atendimento1.NomePaciente =
+        "Carlos Eduardo";
+
+    atendimento1.AdicionarProcedimento(
+        new Procedimento(
+            "Holter 24h",
+            250.00m));
+
+    atendimento1.ExibirResumo();
+}
+
+// Testando a cópia superficial
+Console.WriteLine(
+    "\n--- Atendimento 2: " +
+    "Cópia Superficial ---");
+
+var modeloParaTeste =
+    gerenciador.ObterClone(
+        "CARDIO_PADRAO");
+
+if (modeloParaTeste != null)
+{
+    var atendimentoErro =
+        modeloParaTeste.ClonarSuperficial();
+
+    atendimentoErro.NomePaciente =
+        "Ana Maria";
+
+    atendimentoErro.AdicionarProcedimento(
+        new Procedimento(
+            "Glicemia em Jejum",
+            30.00m));
+
+    Console.WriteLine(
+        "\n[Atendimento da Ana Maria]");
+
+    atendimentoErro.ExibirResumo();
+
+    Console.WriteLine(
+        "\n[Verificação] O modelo compartilhado " +
+        "também foi alterado:");
+
+    modeloParaTeste.ExibirResumo();
+}
+
+// Verificando o isolamento da cópia profunda
+Console.WriteLine(
+    "\n--- Verificação da Cópia Profunda ---");
+
+Console.WriteLine(
+    "O Atendimento 1 continua independente " +
+    "do modelo base:");
+
+if (atendimento1 != null)
+{
+    atendimento1.ExibirResumo();
+}
