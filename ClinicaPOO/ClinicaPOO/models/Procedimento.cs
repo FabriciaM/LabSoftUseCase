@@ -13,11 +13,11 @@ namespace ClinicaPOO.Models
             Valor = valor;
         }
 
+        // MemberwiseClone cria uma nova instância
+        // copiando os valores do objeto atual.
         public object Clone()
         {
-            return new Procedimento(
-                this.Nome,
-                this.Valor);
+            return this.MemberwiseClone();
         }
     }
 }

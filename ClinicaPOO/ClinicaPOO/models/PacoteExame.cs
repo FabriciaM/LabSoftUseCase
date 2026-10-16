@@ -28,14 +28,17 @@ namespace ClinicaPOO.Models
 
         public object Clone()
         {
+            // MemberwiseClone copia as propriedades básicas
+            // e inicialmente copia a referência da lista.
             PacoteExame pacoteClonado =
-                new PacoteExame(
-                    this.NomePacote,
-                    this.OrientacoesJejum);
+                (PacoteExame)this.MemberwiseClone();
 
-            pacoteClonado.NomePaciente =
-                this.NomePaciente;
+            // Criamos uma lista nova para não compartilhar
+            // a lista do pacote original.
+            pacoteClonado.Procedimentos =
+                new List<Procedimento>();
 
+            // Clonamos cada procedimento individualmente.
             foreach (Procedimento item in this.Procedimentos)
             {
                 Procedimento itemCopia =
@@ -47,6 +50,7 @@ namespace ClinicaPOO.Models
 
             return pacoteClonado;
         }
+
 
         public PacoteExame ClonarSuperficial()
         {
