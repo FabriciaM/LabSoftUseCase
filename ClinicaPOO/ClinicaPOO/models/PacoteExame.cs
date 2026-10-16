@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClinicaPOO.Interfaces;
 
 namespace ClinicaPOO.Models
 {
-    public class PacoteExame : ICloneable
+    public class PacoteExame :
+        ICloneable,
+        IPrototipo<PacoteExame>
     {
         public string NomePacote { get; set; }
         public string OrientacoesJejum { get; set; }
@@ -28,17 +31,12 @@ namespace ClinicaPOO.Models
 
         public object Clone()
         {
-            // MemberwiseClone copia as propriedades básicas
-            // e inicialmente copia a referência da lista.
             PacoteExame pacoteClonado =
                 (PacoteExame)this.MemberwiseClone();
 
-            // Criamos uma lista nova para não compartilhar
-            // a lista do pacote original.
             pacoteClonado.Procedimentos =
                 new List<Procedimento>();
 
-            // Clonamos cada procedimento individualmente.
             foreach (Procedimento item in this.Procedimentos)
             {
                 Procedimento itemCopia =
@@ -51,6 +49,10 @@ namespace ClinicaPOO.Models
             return pacoteClonado;
         }
 
+        public PacoteExame Clonar()
+        {
+            return (PacoteExame)this.Clone();
+        }
 
         public PacoteExame ClonarSuperficial()
         {

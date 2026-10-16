@@ -16,17 +16,18 @@ namespace ClinicaPOO.Services
             _prototipos[chave] = prototipo;
         }
 
-        public object? ObterClone(string chave)
+        public PacoteExame? ObterClone(string chave)
         {
             if (_prototipos.ContainsKey(chave))
             {
                 PacoteExame modeloOriginal =
                     _prototipos[chave];
 
-                return modeloOriginal.Clone();
+                return modeloOriginal.Clonar();
             }
 
             return null;
         }
+
     }
 }
