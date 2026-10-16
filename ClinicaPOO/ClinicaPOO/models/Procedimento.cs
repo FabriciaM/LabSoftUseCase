@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClinicaPOO.Models
 {
-    public class Procedimento
+    public class Procedimento : ICloneable
     {
         public string Nome { get; set; }
         public decimal Valor { get; set; }
@@ -17,14 +13,11 @@ namespace ClinicaPOO.Models
             Valor = valor;
         }
 
-        // Clonagem Manual: criamos uma nova instância com os mesmos dados.
-        public Procedimento Clonar()
+        public object Clone()
         {
-            Procedimento novoProcedimento =
-                new Procedimento(this.Nome, this.Valor);
-
-            return novoProcedimento;
+            return new Procedimento(
+                this.Nome,
+                this.Valor);
         }
     }
 }
-

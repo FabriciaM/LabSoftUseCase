@@ -122,8 +122,9 @@ Console.WriteLine(
     "\n--- Atendimento 1: " +
     "Cópia Profunda ---");
 
+// Clone() retorna object, por isso fazemos o cast.
 var atendimento1 =
-    gerenciador.ObterClone(
+    (PacoteExame?)gerenciador.ObterClone(
         "CARDIO_PADRAO");
 
 if (atendimento1 != null)
@@ -144,8 +145,9 @@ Console.WriteLine(
     "\n--- Atendimento 2: " +
     "Cópia Superficial ---");
 
+// Clone() retorna object, por isso fazemos o cast.
 var modeloParaTeste =
-    gerenciador.ObterClone(
+    (PacoteExame?)gerenciador.ObterClone(
         "CARDIO_PADRAO");
 
 if (modeloParaTeste != null)

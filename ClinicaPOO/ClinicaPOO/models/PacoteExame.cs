@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace ClinicaPOO.Models
 {
-    public class PacoteExame
+    public class PacoteExame : ICloneable
     {
         public string NomePacote { get; set; }
         public string OrientacoesJejum { get; set; }
         public string NomePaciente { get; set; }
         public List<Procedimento> Procedimentos { get; set; }
 
-        public PacoteExame(string nomePacote, string orientacoesJejum)
+        public PacoteExame(
+            string nomePacote,
+            string orientacoesJejum)
         {
             NomePacote = nomePacote;
             OrientacoesJejum = orientacoesJejum;
@@ -18,54 +20,75 @@ namespace ClinicaPOO.Models
             Procedimentos = new List<Procedimento>();
         }
 
-        public void AdicionarProcedimento(Procedimento procedimento)
+        public void AdicionarProcedimento(
+            Procedimento procedimento)
         {
             Procedimentos.Add(procedimento);
         }
 
-        // 1. CÓPIA PROFUNDA (DEEP COPY) - O Jeito Correto!
-        // Instancia um novo pacote E uma nova lista com novos procedimentos clonados
-        public PacoteExame Clonar()
+        public object Clone()
         {
-            // Criamos um novo pacote na memória usando 'new'
-            PacoteExame pacoteClonado = new PacoteExame(this.NomePacote, this.OrientacoesJejum);
-            pacoteClonado.NomePaciente = this.NomePaciente;
+            PacoteExame pacoteClonado =
+                new PacoteExame(
+                    this.NomePacote,
+                    this.OrientacoesJejum);
 
-            // Percorremos a lista original e clonamos item por item para a nova lista
+            pacoteClonado.NomePaciente =
+                this.NomePaciente;
+
             foreach (Procedimento item in this.Procedimentos)
             {
-                Procedimento itemCopia = item.Clonar(); // Instancia um novo procedimento
-                pacoteClonado.Procedimentos.Add(itemCopia);
+                Procedimento itemCopia =
+                    (Procedimento)item.Clone();
+
+                pacoteClonado.Procedimentos.Add(
+                    itemCopia);
             }
 
             return pacoteClonado;
         }
 
-        // 2. CÓPIA SUPERFICIAL (SHALLOW COPY) - Apenas para entender o Erro
-        // Copia apenas o pacote, mas aponta para a MESMA lista de procedimentos na memória
         public PacoteExame ClonarSuperficial()
         {
-            PacoteExame pacoteRaso = new PacoteExame(this.NomePacote, this.OrientacoesJejum);
-            pacoteRaso.NomePaciente = this.NomePaciente;
+            PacoteExame pacoteRaso =
+                new PacoteExame(
+                    this.NomePacote,
+                    this.OrientacoesJejum);
 
-            // PERIGO: Não criamos uma nova lista, reutilizamos a mesma referência!
-            pacoteRaso.Procedimentos = this.Procedimentos;
+            pacoteRaso.NomePaciente =
+                this.NomePaciente;
+
+            pacoteRaso.Procedimentos =
+                this.Procedimentos;
 
             return pacoteRaso;
         }
 
         public void ExibirResumo()
         {
-            Console.WriteLine($"\n[PACOTE]: {NomePacote} | Paciente: {NomePaciente}");
-            Console.WriteLine($"  Orientação: {OrientacoesJejum}");
-            Console.WriteLine("  Procedimentos inclusos:");
+            Console.WriteLine(
+                $"\n[PACOTE]: {NomePacote} | " +
+                $"Paciente: {NomePaciente}");
+
+            Console.WriteLine(
+                $"  Orientação: {OrientacoesJejum}");
+
+            Console.WriteLine(
+                "  Procedimentos inclusos:");
+
             decimal total = 0;
+
             foreach (var p in Procedimentos)
             {
-                Console.WriteLine($"   - {p.Nome}: R$ {p.Valor:F2}");
+                Console.WriteLine(
+                    $"   - {p.Nome}: " +
+                    $"R$ {p.Valor:F2}");
+
                 total += p.Valor;
             }
-            Console.WriteLine($"  Total: R$ {total:F2}");
+
+            Console.WriteLine(
+                $"  Total: R$ {total:F2}");
         }
     }
 }
